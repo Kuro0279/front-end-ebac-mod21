@@ -1,0 +1,12 @@
+.formulario {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    margin-bottom: 16px;
+    text-align: center;
+    width: 20vw;
+    height: 5vh;
+    border-radius: 20px;
+}
