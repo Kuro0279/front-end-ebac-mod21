@@ -3,9 +3,10 @@ import ItemLivro from "./ItemLivro";
 
 type Props = {
     livros : Livro[];
+    onDelete: (id: string) => void;
 }
 
-const ListaLivros = ({livros}:Props) => {
+const ListaLivros = ({livros, onDelete}:Props) => {
 
     if(livros.length === 0) {
         return <p>Nenhum livro registrado <i>até agora</i></p>
@@ -14,7 +15,7 @@ const ListaLivros = ({livros}:Props) => {
     return(
         <div>
             {
-                livros.map(item => (<ItemLivro key={item._id} livro={item}/>))
+                livros.map(item => (<ItemLivro key={item._id} livro={item} onDelete={onDelete}/>))
             }
         </div>
     )

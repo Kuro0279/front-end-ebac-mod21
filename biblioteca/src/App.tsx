@@ -9,13 +9,24 @@ function App() {
 
   const [livros, setLivros] = useState<Livro[]>([])
 
-  const APIurl = "https://crudcrud.com/api/b7f06b3dca2f44a6838fe32ed70d2347/livros"
+  const APIurl = "https://crudcrud.com/api/68485dfe914d4a7fa7d1e85b4abf6342/livros"
 
   const addLivro = (dados: Livro) => {
 
     axios
     .post<Livro>(APIurl, dados)
     .then(resposta => setLivros(prev => [...prev, resposta.data]))
+  }
+  
+  const excLivro = (id: string) => {
+    axios
+    .delete(`${APIurl}/${id}`)
+    .then(() => {
+      setLivros(prev =>
+        prev.filter(livro => livro._id !== id)
+      )
+    })
+    .catch(erro => console.log(erro))
   }
 
   useEffect(() => {
@@ -30,7 +41,7 @@ function App() {
       <div className={styles.formulario}>
         <FormularioLivro aoEnviar={addLivro}/>
       </div>
-      <ListaLivros livros={livros} />
+      <ListaLivros livros={livros} onDelete={excLivro} />
     </div>
   )
 }
